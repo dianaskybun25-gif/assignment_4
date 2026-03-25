@@ -78,3 +78,40 @@ def analyze_methods_update(data):
 statistics_up = analyze_methods_update(experiments_data)
 for method in statistics_up:
     print(method, statistics_up[method])
+
+def analyze_methods_eff(data):
+    statistics_e = {}
+    methods = {}
+    for method in data:
+        method_name = method["method"]
+        if method_name not in methods:
+            methods[method_name] = []
+        methods[method_name].append(method)
+    for i in methods:
+        stat = {}
+        error_av = 0
+        time = 0
+        for j in methods[i]:
+            error_av += j["error"]
+            time += j["time_ms"]
+        error_av = round(error_av / len(methods[i]), 2)
+        speed_av = round(len(methods[i])/time, 2)
+        stat["Середня швидкість обрахунку"] = speed_av
+        stat["Середня величина помилки"] = error_av
+        statistics_e[i] = stat
+    return statistics_e
+a = analyze_methods_eff(experiments_data)
+for method in a:
+    print(method, a[method])
+s = []
+e = []
+for v in a.values():
+    s.append(v["Середня швидкість обрахунку"])
+    e.append(v["Середня величина помилки"])
+max_s = max(s)
+min_e = min(e)
+for i in a:
+    if a[i]["Середня величина помилки"] == min_e:
+        print(f"Мін. середня похибка методу: {i} methods - {a[i]["Середня величина помилки"]}")
+    if a[i]["Середня швидкість обрахунку"] == max_s:
+        print(f"Макс.середня швидкість методу: {i} methods - {a[i]["Середня швидкість обрахунку"]}")
