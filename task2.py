@@ -9,11 +9,10 @@ students_math_results = [
 "Discrete Math": 50}}
 ]
 
-s = [{"name": "Олександр", "scores": {"Calculus": 85,
-"Algebra": 90, "Discrete Math": 78}}]
 
 def get_successful_students(students_list, passing_score=60):
     succ_students = {}
+    ov = []
     for student in students_list:
         current_student = student
         av = 0
@@ -23,8 +22,10 @@ def get_successful_students(students_list, passing_score=60):
             else:
                 av = av + val
         av = av / len(current_student["scores"])
-        return av
+        if av != 0:
+            ov.append(av)
+    return ov
 
-get_successful_students(s)
+get_successful_students(students_math_results)
 
-print(get_successful_students(s))
+print(get_successful_students(students_math_results))
