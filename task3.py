@@ -15,6 +15,7 @@ experiments_data = [
 
 def analyze_methods(data):
     statistics = {}
+    #--------------------
     n = []
     e = []
     r = []
@@ -26,6 +27,7 @@ def analyze_methods(data):
             r.append(method)
         if method["method"] == "Newton":
             n.append(method)
+    #------------------------------
     for i in o:
         stat = {}
         iterations = len(i)
@@ -37,14 +39,27 @@ def analyze_methods(data):
         er = [j["error"] for j in i]
         m_error = max(er)
         stat["max_error"] = m_error
+        #----------------------------
         if i == n:
             statistics["Newton"] = stat
         if i == e:
             statistics["Euler"] = stat
         if i == r:
             statistics["Runge-Kutta"] = stat
+        #----------------------------
     return statistics
 
 statistics_1 = analyze_methods(experiments_data)
 for method in statistics_1:
     print(method, statistics_1[method])
+
+def analyze_methods_update(data):
+    statistics = {}
+    methods = {}
+    for method in data:
+        method_name = method["method"]
+        if method_name not in methods:
+            methods[method_name] = []
+        methods[method_name].append(method)
+    return methods
+print(analyze_methods_update(experiments_data))
