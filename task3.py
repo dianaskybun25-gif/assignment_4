@@ -54,12 +54,27 @@ for method in statistics_1:
     print(method, statistics_1[method])
 
 def analyze_methods_update(data):
-    statistics = {}
+    statistics_2 = {}
     methods = {}
     for method in data:
         method_name = method["method"]
         if method_name not in methods:
             methods[method_name] = []
         methods[method_name].append(method)
-    return methods
-print(analyze_methods_update(experiments_data))
+    for i in methods:
+        stat = {}
+        stat["iterations_count"] = len(methods[i])
+        time_ms = 0
+        er = []
+        for j in methods[i]:
+            time_ms += j["time_ms"]
+            er.append(j["error"])
+        stat["total_time_ms"] = time_ms
+        stat["max_error"] = max(er)
+        statistics_2[i] = stat
+    return statistics_2
+
+
+statistics_up = analyze_methods_update(experiments_data)
+for method in statistics_up:
+    print(method, statistics_up[method])
