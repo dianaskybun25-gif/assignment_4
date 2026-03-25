@@ -14,15 +14,14 @@ def get_successful_students(students_list, passing_score=60):
     succ_students = {}
 
     for student in students_list:
-        current_student = student
         s = []
-        for val in current_student["scores"].values():
+        for val in student["scores"].values():
             s.append(val)
         if min(s) < passing_score:
             continue
         else:
             av = round(sum(s)/len(s), 2)
-            succ_students[current_student["name"]] = av
+            succ_students[student["name"]] = av
     return succ_students
 
 get_successful_students(students_math_results)
