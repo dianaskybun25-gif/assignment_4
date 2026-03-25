@@ -46,4 +46,5 @@ def analyze_methods(data):
     return statistics
 
 statistics_1 = analyze_methods(experiments_data)
-print(statistics_1)
+for method in statistics_1:
+    print(method, statistics_1[method])
