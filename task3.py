@@ -50,8 +50,8 @@ def analyze_methods(data):
     return statistics
 
 statistics_1 = analyze_methods(experiments_data)
-for method in statistics_1:
-    print(method, statistics_1[method])
+#for method in statistics_1:
+    #print(method, statistics_1[method])
 
 def analyze_methods_update(data):
     statistics_2 = {}
@@ -78,6 +78,8 @@ def analyze_methods_update(data):
 statistics_up = analyze_methods_update(experiments_data)
 for method in statistics_up:
     print(method, statistics_up[method])
+
+print("-------------------------------------------------------------------")
 
 def analyze_methods_eff(data):
     statistics_e = {}
